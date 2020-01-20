@@ -17,17 +17,15 @@ function divide(num1, num2) {
 function operate(operator, num1, num2) {
     switch (operator) {
         case "+":
-            console.log(add(num1, num2));
-            break;
+            return add(num1, num2);
         case "-":
-            console.log(substract(num1, num2));
-            break;
+            return substract(num1, num2);
         case "*":
-            console.log(multiply(num1, num2));
-            break;
+            result = (num1 === 0 || num2 === 0) ? "You can't multiply by 0" : multiply(num1, num2);
+            return Number.isInteger(result) ? result : result.toFixed(1);
         case "/":
-            console.log(divide(num1, num2));
-            break;
+            result = divide(num1, num2);
+            return Number.isInteger(result) ? result : result.toFixed(1);
         default:
             console.log("Pick correct operator: +, -, * or /");
     }
@@ -35,9 +33,35 @@ function operate(operator, num1, num2) {
 
 const display = document.getElementById("display");
 const buttons = document.querySelectorAll("button");
+let result = "";
+let operator = "";
+let num = "";
 Array.from(buttons).forEach(button => {
     button.addEventListener("click", () => {
-        let value = button.innerHTML;
-        display.innerHTML = value;
+        let values = button.innerHTML;
+        calculate(values);
+        display.innerHTML = result;
     })
 })
+
+function calculate(value) {
+    if (value === "-" || value === "+" || value === "*" || value === "/"){
+        if (num !== "") {
+            num = operate(operator, Number(num), Number(result));
+        } else {
+            num = result;
+        }
+        operator = value;
+        result = '';
+    } else if (value === "=") {
+        if (num !== "" && operator !== "" && result !== ""){
+            result = operate(operator, Number(num), Number(result));
+            num = result;
+        }
+    }else if (value === "Clear") {
+        result = "";
+        num = "";
+    } else {
+        result += value;
+    }
+}
