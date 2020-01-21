@@ -21,17 +21,22 @@ function operate(operator, num1, num2) {
         case "-":
             return substract(num1, num2);
         case "*":
-            result = (num1 === 0 || num2 === 0) ? "You can't multiply by 0" : multiply(num1, num2);
+            result = multiply(num1, num2);
             return Number.isInteger(result) ? result : result.toFixed(1);
         case "/":
-            result = divide(num1, num2);
-            return Number.isInteger(result) ? result : result.toFixed(1);
-        default:
-            console.log("Pick correct operator: +, -, * or /");
-    }
+            result = (num2 === 0) ? "You can't divide by 0" : divide(num1, num2);
+            // console.log(result);
+            if (typeof(result) === String) {
+                console.log(result);
+                return result;
+                // move it to divide function?
+            } else {
+                return Number.isInteger(result) ? result : result.toFixed(1);
+            }
+        }
 }
 
-const display = document.getElementById("display");
+const display = document.getElementById("screen-line");
 const buttons = document.querySelectorAll("button");
 let result = "";
 let operator = "";
@@ -58,7 +63,7 @@ function calculate(value) {
             result = operate(operator, Number(num), Number(result));
             num = result;
         }
-    }else if (value === "Clear") {
+    }else if (value === "CE") {
         result = "";
         num = "";
     } else {

@@ -3,33 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="calc">
         <div id="screen-line">
-            <span id="display">1990</span>
-            <button id="clear">Clear</button>
+        </div>
+        <div id="line-zero">
+            <button id="clear">CE</button>
+            <button id="remove">C</button>
         </div>
         <div id="first-line">
-            <button id="seven">7</button>
-            <button id="eight">8</button>
-            <button id="nine">9</button>
+            <button id="seven" class="nr">7</button>
+            <button id="eight" class="nr">8</button>
+            <button id="nine" class="nr">9</button>
             <button id="divide">/</button>
         </div>
         <div id="second-line">
-            <button id="four">4</button>
-            <button id="five">5</button>
-            <button id="six">6</button>
+            <button id="four" class="nr">4</button>
+            <button id="five" class="nr">5</button>
+            <button id="six" class="nr">6</button>
             <button id="multiply">*</button>
         </div>
         <div id="third-line">
-            <button id="one">1</button>
-            <button id="two">2</button>
-            <button id="three">3</button>
+            <button id="one" class="nr">1</button>
+            <button id="two" class="nr">2</button>
+            <button id="three" class="nr">3</button>
             <button id="substract">-</button>
         </div>
-        <div id="fourth-line">
-            <button id="zero">0</button>
+        <div id="fourth-line" class="clearfix">
+            <button id="zero" class="nr">0</button>
             <button id="coma">.</button>
             <button id="equal">=</button>
             <button id="plus">+</button>
