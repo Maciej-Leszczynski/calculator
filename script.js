@@ -39,44 +39,51 @@ function operate(operator, num1, num2) {
             if (num2 === 0) {
                 return "Don't divide by 0!"
             } else {
-                return divide(num1, num2);
+                result = Math.round(divide(num1, num2) *100) / 100;
+                return result;
             }
         }
     }
 
 // Button reactions
 function calculate(value) {
-    if (value === "=") {
-        if (num !== "" && operator !== "" && result !== ""){
-            result = operate(operator, Number(num), Number(result));
-            num = result;
-            displayedValue = result;
-            result = "";
-        }
-    } else if (value==='+' || value==='-' || value==='*' || value ==='/') {
-        if (num !== "") {
-            num = operate(operator, Number(num), Number(result));
-            displayedValue = "" + String(num) + value;
-        } else {
-            num = result;
-            displayedValue += value;
-        }
-        operator = value;
-        result = '';    
-    } else if (value in numbers) {
-        result += value;
-        displayedValue += value;    
-    } else if (value === "Clear") {
+    if (value === "Clear") {
         result = "";
         num = "";
         displayedValue = "";
-    } else if (value === ".") {
-        if (!(displayedValue.includes("."))) {
+    } else if (value === "C") {
+        displayedValue = displayedValue.slice(0, displayedValue.length-1);
+        result = displayedValue;
+    } else if (displayedValue.length < 10) {
+        if (value === "=") {
+            if (num !== "" && operator !== "" && result !== ""){
+                result = operate(operator, Number(num), Number(result));
+                num = result;
+                displayedValue = result;
+                result = "";
+            }
+        } else if (value==='+' || value==='-' || value==='*' || value ==='/') {
+            if (num !== "") {
+                num = operate(operator, Number(num), Number(result));
+                displayedValue = "" + String(num) + value;
+            } else {
+                num = result;
+                displayedValue += value;
+            }
+            operator = value;
+            result = '';    
+        } else if (value in numbers) {
             result += value;
-            displayedValue += value;
+            displayedValue += value;    
+        } else if (value === ".") {
+            if (!(displayedValue.includes("."))) {
+                result += value;
+                displayedValue += value;
+            }
         }
     }
 }
+
 
 Array.from(buttons).forEach(button => {
     button.addEventListener("click", () => {
@@ -89,7 +96,5 @@ Array.from(buttons).forEach(button => {
 })
 
 // TO DO:
-// rounding
+// bug after mult, divl
 // more style
-// bug after mult, div
-// backspace
